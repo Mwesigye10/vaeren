@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Væren · Varat · Væren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0b;
+    --surface: #13120f;
+    --border: #1e1c17;
+    --border2: #2a2420;
+    --gold: #c8b896;
+    --gold-dim: #7a6e5a;
+    --gold-dark: #4a4035;
+    --text: #d8cfc0;
+    --text-dim: #8a7e6e;
+    --text-faint: #5a5040;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%; height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    animation: grain 8s steps(10) infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, #0d0d0b 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes grain {
+    0%,100%{transform:translate(0,0)} 10%{transform:translate(-2%,-3%)}
+    30%{transform:translate(2%,1%)} 50%{transform:translate(-1%,2%)}
+    70%{transform:translate(3%,-1%)} 90%{transform:translate(-2%,3%)}
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes breathe {
+    0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.12; }
+    50%      { transform: translate(-50%,-50%) scale(1.12); opacity: 0.2; }
+  }
+
+  @keyframes blink {
+    0%,100%{ opacity:1 } 50%{ opacity:0 }
+  }
+
+  @keyframes slideUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .screen {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .hidden { display: none !important; }
+
+  /* ── LANGUAGE SCREEN ── */
+  .lang-screen { gap: 0; }
+
+  .lang-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 48px;
+  }
+
+  .lang-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 52px;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-bottom: 56px;
+  }
+
+  .lang-title span { color: var(--gold-dim); }
+
+  .lang-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 40px;
+  }
+
+  .lang-btn {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dark);
+    padding: 16px 32px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.35s ease;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: rgba(200,184,150,0.04);
+  }
+
+  .lang-btn-om {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #4a4035;
+    border: 1px solid #2a2420;
+    padding: 12px 32px;
+    background: transparent;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.35s ease;
+  }
+  .lang-btn-om:hover { color: #7a6e5a; border-color: #4a4035; }
+  .disclaimer-box {
+    max-width: 480px;
+    width: 100%;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    padding: 40px 36px;
+    margin: 32px 0;
+    animation: slideUp 0.8s ease forwards;
+  }
+
+  .disclaimer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 24px;
+  }
+
+  .disclaimer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .crisis-link {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    text-decoration: none;
+    margin-top: 8px;
+    transition: color 0.3s;
+  }
+
+  .crisis-link:hover { color: var(--gold-dim); }
+
+  .crisis-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--gold-dim);
+    font-style: italic;
+  }
+
+  /* ── QUESTION SCREEN ── */
+  .question-screen {
+    gap: 0;
+    justify-content: center;
+  }
+
+  .breath-orb {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138,122,90,0.15) 0%, transparent 70%);
+    animation: breathe 7s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .q-counter {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 48px;
+    z-index: 1;
+  }
+
+  .q-box {
+    max-width: 520px;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 56px;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(22px, 4vw, 30px);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100px;
+    animation: slideUp 0.7s ease forwards;
+  }
+
+  .q-cursor {
+    animation: blink 1.1s infinite;
+    color: var(--gold-dim);
+    font-style: normal;
+  }
+
+  .q-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-faint);
+    margin-bottom: 48px;
+    z-index: 1;
+    line-height: 1.7;
+  }
+
+  .q-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .q-btn-prev, .q-btn-next {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.35s;
+    padding: 14px 28px;
+    border: 1px solid var(--border2);
+    background: transparent;
+  }
+
+  .q-btn-prev { color: var(--text-faint); }
+  .q-btn-prev:hover { color: var(--text-dim); border-color: var(--gold-dark); }
+
+  .q-btn-next {
+    color: var(--gold);
+    border-color: var(--gold-dark);
+  }
+  .q-btn-next:hover {
+    background: rgba(200,184,150,0.05);
+    border-color: var(--gold-dim);
+  }
+
+  .q-btn-end {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-top: 48px;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+  .q-btn-end:hover { color: var(--gold-dim); }
+
+  /* ── CLOSE SCREEN ── */
+  .close-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(20px, 3.5vw, 28px);
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 48px;
+    animation: slideUp 0.8s ease forwards;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    position: fixed;
+    bottom: 20px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--border2);
+    z-index: 2;
+  }
+
+  /* Shared btn */
+  .btn-ghost {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dark);
+    padding: 14px 36px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.35s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold-dim);
+    background: rgba(200,184,150,0.04);
+  }
+
+  .logo-small {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    margin-bottom: 64px;
+    z-index: 1;
+  }
+
+  /* ── ABOUT ── */
+  .about-box {
+    max-width: 480px;
+    width: 100%;
+    border-left: 1px solid var(--border2);
+    padding: 0 0 0 32px;
+    margin: 40px 0 48px;
+    text-align: left;
+    animation: slideUp 0.8s ease forwards;
+  }
+
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    color: var(--text-dim);
+    line-height: 1.85;
+    margin-bottom: 32px;
+  }
+
+  .about-sig {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--text-faint);
+    letter-spacing: 0.05em;
+  }
+
+  .about-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 24px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.3s;
+  }
+  .about-trigger:hover { color: var(--gold-dim); }
+
+  @media (max-width: 480px) {
+    .disclaimer-box { padding: 28px 24px; }
+    .q-nav { gap: 12px; }
+    .about-box { padding-left: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ LANGUAGE SCREEN ═══ -->
+<div id="screen-lang">
+  <div class="screen lang-screen" style="min-height:100vh;" id="lang-hero">
+    <p class="lang-eyebrow">Vælg dit sprog · Välj ditt språk · Velg ditt språk</p>
+    <h1 class="lang-title">Væren<span> · </span>Varat</h1>
+    <div class="lang-btns">
+      <button class="lang-btn" onclick="setLang('da')">Dansk</button>
+      <button class="lang-btn" onclick="setLang('sv')">Svenska</button>
+      <button class="lang-btn" onclick="setLang('no')">Norsk</button>
+      <button class="lang-btn-om" onclick="scrollToAboutLang()">Om ↓</button>
+    </div>
+  </div>
+  <div id="lang-about-section" style="
+    position:relative;z-index:1;
+    max-width:480px;margin:0 auto;
+    padding:80px 24px 120px;
+    text-align:left;
+  ">
+    <p style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#4a4035;margin-bottom:40px;font-family:'Lato',sans-serif;font-weight:300;">Om · About</p>
+    <div style="border-left:1px solid #2a2420;padding-left:32px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:20px;color:#8a7e6e;line-height:1.85;margin-bottom:32px;">Jeg er selv undervejs. Denne app er min invitation til at undersøge det sammen.</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:16px;color:#4a4035;letter-spacing:0.05em;">— Nicholas Mwesigye</p>
+    </div>
+    <div style="margin-top:60px;text-align:center;">
+      <button onclick="scrollToTop()" style="font-family:'Lato',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#4a4035;background:none;border:none;cursor:pointer;">↑ Tilbage til sprog</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DISCLAIMER SCREEN ═══ -->
+<div id="screen-disclaimer" class="screen hidden">
+  <p class="lang-eyebrow" id="d-eyebrow"></p>
+  <div class="disclaimer-box">
+    <p class="disclaimer-title" id="d-title"></p>
+    <p class="disclaimer-text" id="d-text"></p>
+    <p class="disclaimer-text" id="d-crisis-label"></p>
+    <a class="crisis-link" id="d-crisis-dk" href="https://livslinjen.dk" target="_blank" rel="noopener"></a>
+    <a class="crisis-link" id="d-crisis-se" href="https://mind.se" target="_blank" rel="noopener"></a>
+    <a class="crisis-link" id="d-crisis-no" href="https://mentalhelse.no" target="_blank" rel="noopener"></a>
+  </div>
+  <button class="btn-ghost" id="d-btn" onclick="startQuestions()"></button>
+</div>
+
+<!-- ═══ QUESTION SCREEN ═══ -->
+<div id="screen-question" class="screen question-screen hidden">
+  <div class="breath-orb"></div>
+  <p class="logo-small" id="q-logo"></p>
+  <p class="q-counter" id="q-counter"></p>
+  <div class="q-box">
+    <p class="q-text" id="q-text"><span id="q-cursor" class="q-cursor">|</span></p>
+  </div>
+  <p class="q-hint" id="q-hint"></p>
+  <div class="q-nav">
+    <button class="q-btn-prev" id="q-prev" onclick="prevQ()"></button>
+    <button class="q-btn-next" id="q-next" onclick="nextQ()"></button>
+  </div>
+  <button class="q-btn-end" id="q-end" onclick="showClose()"></button>
+</div>
+
+<!-- ═══ CLOSE SCREEN ═══ -->
+<div id="screen-close" class="screen hidden">
+  <p class="logo-small" id="c-logo"></p>
+  <p class="close-text" id="c-text"></p>
+  <button class="btn-ghost" id="c-restart" onclick="restart()"></button>
+</div>
+
+<!-- ═══ ABOUT SCREEN ═══ -->
+<div id="screen-about" class="screen hidden">
+  <p class="logo-small" id="a-logo"></p>
+  <div class="about-box">
+    <p class="about-text" id="a-text"></p>
+    <p class="about-sig">— Nicholas Mwesigye</p>
+  </div>
+  <button class="btn-ghost" id="a-back" onclick="closeAbout()"></button>
+</div>
+
+<div class="footer" id="footer-text"></div>
+
+<!-- About button (visible on question screen) -->
+<button id="about-trigger" class="about-trigger hidden" onclick="showAbout()"></button>
+
+<script>
+const content = {
+  da: {
+    logo: "Væren",
+    disclaimer: {
+      eyebrow: "Inden du træder ind",
+      title: "Et ord før stilheden",
+      text: "Dette er ikke terapi, rådgivning eller behandling. Det er et rum for din egen undersøgelse – ikke mit. Jeg stiller spørgsmål. Hvad du gør med dem, er dit. Hvis du befinder dig i krise eller har brug for hjælp, bedes du kontakte en professionel.",
+      crisisLabel: "Hjælpelinjer:",
+      crisisDk: "🇩🇰 Livslinjen · 70 201 201 · livslinjen.dk",
+      crisisSe: "🇸🇪 Mind Självmordslinjen · 90101 · mind.se",
+      crisisNo: "🇳🇴 Mental Helse · 116 123 · mentalhelse.no",
+      btn: "Jeg forstår – træd ind"
+    },
+    counter: (i, n) => `Spørgsmål ${i} af ${n}`,
+    hint: "Sid med det. Lad det lande.\nIntet svar er nødvendigt.",
+    prev: "← Forrige",
+    next: "Næste →",
+    end: "Afslut stille",
+    close: "Du behøver ikke finde svaret.\nDet er nok at have mærket spørgsmålet.",
+    restart: "Vend tilbage",
+    footer: "Ingen data gemt · Ingen konto · Ingen algoritme",
+    questions: [
+      "Hvad sker der, når du for et øjeblik holder op med at forsøge at blive til noget?",
+      "Er der et 'dig', der observerer dine tanker – eller er observatøren og tanken det samme?",
+      "Hvornår sidst oplevede du noget uden straks at navngive det?",
+      "Hvad ville forsvinde, hvis du lod din selvfortælling hvile i ét minut?",
+      "Er den ro du søger noget, du kan nå – eller noget der allerede er der, når jagten stopper?",
+      "Hvem er du, når ingen kigger – heller ikke du selv?",
+      "Kan du mærke, at din vejrtrækning sker af sig selv, uden at du beslutter det?",
+      "Hvad er forskellen på at tænke over livet og at leve det?",
+      "Hvis du ikke måtte kalde dig selv noget – intet navn, ingen rolle – hvad er der så tilbage?",
+      "Er din ensomhed noget, du oplever – eller noget du er?",
+      "Hvad holder dig fra at være helt til stede i dette øjeblik?",
+      "Kan du iagttage en tanke, uden at blive den?",
+      "Hvad er stilhed for dig – fravær af lyd, eller fravær af noget andet?",
+      "Hvem besluttede, hvem du skulle blive?",
+      "Er der forskel på den, der søger fred, og den, der allerede er i fred?"
+    ],
+    about: {
+      text: "Jeg er selv undervejs. Denne app er min invitation til at undersøge det sammen.",
+      back: "Vend tilbage"
+    }
+  },
+  sv: {
+    logo: "Varat",
+    disclaimer: {
+      eyebrow: "Innan du stiger in",
+      title: "Ett ord före stillheten",
+      text: "Det här är inte terapi, rådgivning eller behandling. Det är ett rum för din egen undersökning – inte mitt. Jag ställer frågor. Vad du gör med dem är ditt. Om du befinner dig i kris eller behöver hjälp, vänligen kontakta en professionell.",
+      crisisLabel: "Hjälplinjer:",
+      crisisDk: "🇩🇰 Livslinjen · 70 201 201 · livslinjen.dk",
+      crisisSe: "🇸🇪 Mind Självmordslinjen · 90101 · mind.se",
+      crisisNo: "🇳🇴 Mental Helse · 116 123 · mentalhelse.no",
+      btn: "Jag förstår – stig in"
+    },
+    counter: (i, n) => `Fråga ${i} av ${n}`,
+    hint: "Sitt med den. Låt den landa.\nInget svar behövs.",
+    prev: "← Föregående",
+    next: "Nästa →",
+    end: "Avsluta stilla",
+    close: "Du behöver inte hitta svaret.\nDet räcker att ha känt frågan.",
+    restart: "Återvänd",
+    footer: "Ingen data sparas · Inget konto · Ingen algoritm",
+    questions: [
+      "Vad händer när du för ett ögonblick slutar försöka bli något?",
+      "Finns det ett 'du' som observerar dina tankar – eller är observatören och tanken samma sak?",
+      "När upplevde du senast något utan att omedelbart sätta ett namn på det?",
+      "Vad skulle försvinna om du lät din självberättelse vila i en minut?",
+      "Är den ro du söker något du kan nå – eller något som redan finns där när jakten upphör?",
+      "Vem är du när ingen tittar – inte ens du själv?",
+      "Kan du känna att din andning sker av sig själv, utan att du bestämmer det?",
+      "Vad är skillnaden mellan att tänka på livet och att leva det?",
+      "Om du inte fick kalla dig något – inget namn, ingen roll – vad finns kvar?",
+      "Är din ensamhet något du upplever – eller något du är?",
+      "Vad hindrar dig från att vara helt närvarande i detta ögonblick?",
+      "Kan du iaktta en tanke utan att bli den?",
+      "Vad är stillhet för dig – frånvaro av ljud, eller frånvaro av något annat?",
+      "Vem bestämde vem du skulle bli?",
+      "Är det någon skillnad mellan den som söker fred och den som redan är i fred?"
+    ],
+    about: {
+      text: "Jag är själv på väg. Den här appen är min inbjudan att undersöka det tillsammans.",
+      back: "Återvänd"
+    }
+  },
+  no: {
+    logo: "Væren",
+    disclaimer: {
+      eyebrow: "Før du trer inn",
+      title: "Et ord før stillheten",
+      text: "Dette er ikke terapi, rådgivning eller behandling. Det er et rom for din egen undersøkelse – ikke mitt. Jeg stiller spørsmål. Hva du gjør med dem, er ditt. Hvis du befinner deg i krise eller trenger hjelp, ta kontakt med en fagperson.",
+      crisisLabel: "Hjelpelinjer:",
+      crisisDk: "🇩🇰 Livslinjen · 70 201 201 · livslinjen.dk",
+      crisisSe: "🇸🇪 Mind Självmordslinjen · 90101 · mind.se",
+      crisisNo: "🇳🇴 Mental Helse · 116 123 · mentalhelse.no",
+      btn: "Jeg forstår – trer inn"
+    },
+    counter: (i, n) => `Spørsmål ${i} av ${n}`,
+    hint: "Sitt med det. La det lande.\nInget svar er nødvendig.",
+    prev: "← Forrige",
+    next: "Neste →",
+    end: "Avslutt stille",
+    close: "Du trenger ikke finne svaret.\nDet er nok å ha kjent spørsmålet.",
+    restart: "Vend tilbake",
+    footer: "Ingen data lagret · Ingen konto · Ingen algoritme",
+    questions: [
+      "Hva skjer når du for et øyeblikk slutter å forsøke å bli noe?",
+      "Finnes det et 'deg' som observerer tankene dine – eller er observatøren og tanken det samme?",
+      "Når opplevde du sist noe uten å navngi det med en gang?",
+      "Hva ville forsvinne hvis du lot selvfortellingen din hvile i ett minutt?",
+      "Er roen du søker noe du kan nå – eller noe som allerede er der når jakten stopper?",
+      "Hvem er du når ingen ser på – heller ikke du selv?",
+      "Kan du merke at pusten din skjer av seg selv, uten at du bestemmer det?",
+      "Hva er forskjellen mellom å tenke på livet og å leve det?",
+      "Hvis du ikke fikk kalle deg noe – intet navn, ingen rolle – hva er det da igjen?",
+      "Er ensomheten din noe du opplever – eller noe du er?",
+      "Hva hindrer deg fra å være helt til stede i dette øyeblikket?",
+      "Kan du iaktta en tanke uten å bli den?",
+      "Hva er stillhet for deg – fravær av lyd, eller fravær av noe annet?",
+      "Hvem bestemte hvem du skulle bli?",
+      "Er det forskjell på den som søker fred, og den som allerede er i fred?"
+    ],
+    about: {
+      text: "Jeg er selv underveis. Denne appen er min invitasjon til å undersøke det sammen.",
+      back: "Vend tilbake"
+    }
+  }
+};
+
+let lang = 'da';
+let currentQ = 0;
+let typing = null;
+
+function scrollToAboutLang() {
+  document.getElementById('lang-about-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function scrollToTop() {
+  document.getElementById('lang-hero').scrollIntoView({ behavior: 'smooth' });
+}
+
+function setLang(l) {
+  lang = l;
+  showDisclaimer();
+}
+
+function showDisclaimer() {
+  hide('screen-lang');
+  const d = content[lang].disclaimer;
+  const c = content[lang];
+  setText('d-eyebrow', d.eyebrow);
+  setText('d-title', d.title);
+  setText('d-text', d.text);
+  setText('d-crisis-label', d.crisisLabel);
+  setText('d-crisis-dk', d.crisisDk);
+  setText('d-crisis-se', d.crisisSe);
+  setText('d-crisis-no', d.crisisNo);
+  setText('d-btn', d.btn);
+  setText('footer-text', c.footer);
+  show('screen-disclaimer');
+}
+
+function startQuestions() {
+  hide('screen-disclaimer');
+  currentQ = 0;
+  renderQuestion();
+  show('screen-question');
+  // Show about trigger
+  const t = document.getElementById('about-trigger');
+  t.classList.remove('hidden');
+  setText('about-trigger', content[lang].about.back === 'Återvänd' ? 'Om' : content[lang].about.back === 'Vend tilbake' ? 'Om' : 'Om');
+}
+
+function renderQuestion() {
+  const c = content[lang];
+  const qs = c.questions;
+  const q = qs[currentQ];
+
+  setText('q-logo', c.logo);
+  setText('q-counter', c.counter(currentQ + 1, qs.length));
+  setText('q-hint', c.hint);
+  setText('q-prev', c.prev);
+  setText('q-next', currentQ < qs.length - 1 ? c.next : c.end);
+  setText('q-end', c.end);
+
+  // Show/hide prev
+  document.getElementById('q-prev').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+
+  // Typewriter
+  if (typing) clearInterval(typing);
+  const el = document.getElementById('q-text');
+  const cursor = '<span id="q-cursor" class="q-cursor">|</span>';
+  el.style.animation = 'none';
+  el.offsetHeight; // reflow
+  el.style.animation = 'slideUp 0.5s ease forwards';
+  el.innerHTML = cursor;
+
+  let i = 0;
+  typing = setInterval(() => {
+    if (i < q.length) {
+      el.innerHTML = q.slice(0, i + 1) + cursor;
+      i++;
+    } else {
+      clearInterval(typing);
+      // Remove cursor after done
+      setTimeout(() => {
+        el.innerHTML = q;
+      }, 2000);
+    }
+  }, 30);
+}
+
+function nextQ() {
+  const qs = content[lang].questions;
+  if (currentQ < qs.length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showClose();
+  }
+}
+
+function prevQ() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+  }
+}
+
+function showAbout() {
+  hide('screen-question');
+  document.getElementById('about-trigger').classList.add('hidden');
+  const c = content[lang];
+  setText('a-logo', c.logo);
+  setText('a-text', c.about.text);
+  setText('a-back', c.about.back);
+  show('screen-about');
+}
+
+function closeAbout() {
+  hide('screen-about');
+  show('screen-question');
+  document.getElementById('about-trigger').classList.remove('hidden');
+}
+
+function showClose() {
+  hide('screen-question');
+  const c = content[lang];
+  setText('c-logo', c.logo);
+  setText('c-text', c.close);
+  setText('c-restart', c.restart);
+  show('screen-close');
+}
+
+function restart() {
+  hide('screen-close');
+  document.getElementById('about-trigger').classList.add('hidden');
+  show('screen-lang');
+}
+
+function show(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('hidden');
+  if (id !== 'screen-lang') {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = 'fadeIn 0.9s ease forwards';
+  }
+  if (id === 'screen-lang') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function hide(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+
+function setText(id, text) {
+  document.getElementById(id).textContent = text;
+}
+</script>
+</body>
+</html>
