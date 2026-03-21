@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Væren · Varat · Væren</title>
+<title>Væren · Tillvaron · Væren</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -435,7 +435,7 @@
 <div id="screen-lang">
   <div class="screen lang-screen" style="min-height:100vh;" id="lang-hero">
     <p class="lang-eyebrow">Vælg dit sprog · Välj ditt språk · Velg ditt språk</p>
-    <h1 class="lang-title">Væren<span> · </span>Varat</h1>
+    <h1 class="lang-title">Væren<span> · </span>Tillvaron</h1>
     <div class="lang-btns">
       <button class="lang-btn" onclick="setLang('da')">Dansk</button>
       <button class="lang-btn" onclick="setLang('sv')">Svenska</button>
@@ -451,7 +451,7 @@
   ">
     <p style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#4a4035;margin-bottom:40px;font-family:'Lato',sans-serif;font-weight:300;">Om · About</p>
     <div style="border-left:1px solid #2a2420;padding-left:32px;">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:20px;color:#8a7e6e;line-height:1.85;margin-bottom:32px;">Jeg er selv undervejs. Denne app er min invitation til at undersøge det sammen.</p>
+      <p id="lang-about-text" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:20px;color:#8a7e6e;line-height:1.85;margin-bottom:32px;">Jeg er selv undervejs. Denne app er min invitation til at undersøge det sammen.</p>
       <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:16px;color:#4a4035;letter-spacing:0.05em;">— Nicholas Mwesigye</p>
     </div>
     <div style="margin-top:60px;text-align:center;">
@@ -557,7 +557,7 @@ const content = {
     }
   },
   sv: {
-    logo: "Varat",
+    logo: "Tillvaron",
     disclaimer: {
       eyebrow: "Innan du stiger in",
       title: "Ett ord före stillheten",
@@ -656,6 +656,13 @@ function scrollToTop() {
 
 function setLang(l) {
   lang = l;
+  // Update about text on lang screen to match selected language
+  const aboutTexts = {
+    da: "Jeg er selv undervejs. Denne app er min invitation til at undersøge det sammen.",
+    sv: "Jag är själv på väg. Den här appen är min inbjudan att undersöka det tillsammans.",
+    no: "Jeg er selv underveis. Denne appen er min invitasjon til å undersøke det sammen."
+  };
+  document.getElementById('lang-about-text').textContent = aboutTexts[l];
   showDisclaimer();
 }
 
