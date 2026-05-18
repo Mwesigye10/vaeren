@@ -50,8 +50,6 @@
   .lang-btn:hover{border-color:var(--gold-dim);background:rgba(200,184,150,.04);}
   .lang-btn-om{font-family:'Lato',sans-serif;font-weight:300;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint);border:1px solid var(--border2);padding:12px 32px;background:transparent;cursor:pointer;margin-top:8px;transition:all .35s ease;}
   .lang-btn-om:hover{color:var(--gold-dim);border-color:var(--gold-dark);}
-  .about-multi{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:18px;color:var(--text-dim);line-height:1.85;margin-bottom:18px;}
-  .about-multi:last-of-type{margin-bottom:24px;}
 
   /* DISCLAIMER */
   .disclaimer-box{max-width:480px;width:100%;border:1px solid var(--border2);background:var(--surface);padding:40px 36px;margin:32px 0;}
@@ -134,6 +132,30 @@
   .whisper-actions{margin-top:80px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;z-index:2;}
   .whisper-tap{position:absolute;inset:0;cursor:pointer;z-index:1;}
 
+  /* WELCOME SCREEN */
+  .welcome-screen{justify-content:flex-start;padding-top:64px;padding-bottom:48px;}
+  .welcome-eyebrow{font-family:'Lato',sans-serif;font-weight:300;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:36px;z-index:1;text-align:center;}
+  .welcome-quote{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(20px,4vw,26px);color:var(--text);line-height:1.55;margin-bottom:18px;max-width:520px;text-align:center;z-index:1;padding:0 8px;}
+  .welcome-tagline{font-family:'Lato',sans-serif;font-weight:300;font-size:13px;color:var(--text-dim);line-height:1.7;margin-bottom:44px;max-width:420px;text-align:center;letter-spacing:.02em;z-index:1;padding:0 16px;}
+  .welcome-langs{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px;margin-bottom:52px;z-index:1;}
+  .welcome-langs .lang-btn{padding:11px 16px;font-size:11px;}
+  .welcome-langs .lang-btn.lang-btn-active{border-color:var(--gold);color:var(--gold);background:rgba(200,184,150,.08);}
+  .welcome-divider{width:50px;height:1px;background:var(--border2);margin-bottom:36px;z-index:1;opacity:.5;}
+  .welcome-terms-header{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:17px;color:var(--gold-dim);margin-bottom:30px;letter-spacing:.03em;z-index:1;text-align:center;}
+  .welcome-terms{display:flex;flex-direction:column;gap:22px;width:100%;max-width:520px;margin-bottom:36px;z-index:1;}
+  .term-row{display:flex;align-items:flex-start;gap:16px;text-align:left;}
+  .term-icon{font-size:20px;line-height:1.4;flex-shrink:0;width:28px;text-align:center;opacity:.85;}
+  .term-body{display:flex;flex-direction:column;gap:6px;flex:1;}
+  .term-label{font-family:'Lato',sans-serif;font-weight:400;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;}
+  .term-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:15px;color:var(--text-dim);line-height:1.65;}
+  .welcome-actions{display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:340px;z-index:1;margin-top:8px;}
+  .welcome-actions .btn-ghost{width:100%;}
+  @media(max-width:480px){
+    .welcome-screen{padding-top:40px;}
+    .welcome-langs{max-width:280px;gap:8px;}
+    .welcome-terms{padding:0 4px;}
+  }
+
   /* CLOSE */
   .close-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(20px,3.5vw,28px);color:var(--text-dim);line-height:1.7;max-width:420px;margin-bottom:48px;white-space:pre-line;}
 
@@ -148,8 +170,17 @@
   .logo-small{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:18px;color:var(--text-faint);letter-spacing:.1em;margin-bottom:56px;z-index:1;}
   .footer{position:fixed;bottom:20px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:.1em;color:var(--border2);z-index:2;pointer-events:none;}
 
+  /* CLOSE (×) BUTTON ON QUESTION SCREEN */
+  .q-close{position:absolute;top:18px;right:20px;font-family:'Lato',sans-serif;font-weight:300;font-size:26px;line-height:1;color:var(--text-faint);background:transparent;border:none;cursor:pointer;padding:8px 12px;opacity:.5;transition:opacity .35s ease,color .35s ease;z-index:5;}
+  .q-close:hover{opacity:1;color:var(--gold-dim);}
+
+  /* CHANGE LANGUAGE LINK */
+  .lang-change-btn{font-family:'Lato',sans-serif;font-weight:300;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);background:transparent;border:none;cursor:pointer;margin-top:32px;padding:8px 16px;opacity:.55;transition:opacity .35s ease,color .35s ease;}
+  .lang-change-btn:hover{opacity:1;color:var(--gold-dim);}
+
   @media(max-width:480px){
     .disclaimer-box{padding:28px 24px}
+    .q-close{top:12px;right:12px;font-size:24px;padding:6px 10px;}
     .cat-grid{grid-template-columns:1fr}
     .about-box{padding-left:20px}
     .silence-opt{padding:20px 28px;min-width:80px;}
@@ -162,50 +193,61 @@
 </head>
 <body>
 
-<!-- LANG SCREEN -->
-<div id="screen-lang">
-  <div class="screen" id="lang-hero" style="min-height:100vh;">
-    <div class="lang-orb"></div>
-    <p class="lang-eyebrow">Vælg dit sprog · Välj ditt språk · Velg ditt språk · Choose your language</p>
-    <h1 class="lang-title">Væren<span> · </span>Tillvaron<span> · </span>Being</h1>
-    <p class="lang-invite">Et rum at se i · Ett rum att se i · Et rom å se i · A space to see in</p>
-    <div class="lang-btns">
-      <button class="lang-btn" onclick="setLang('da')">Dansk</button>
-      <button class="lang-btn" onclick="setLang('sv')">Svenska</button>
-      <button class="lang-btn" onclick="setLang('no')">Norsk</button>
-      <button class="lang-btn" onclick="setLang('en')">English</button>
-      <button class="lang-btn-om" onclick="scrollToAboutLang()">Om · About ↓</button>
-    </div>
-  </div>
-  <div id="lang-about-section" style="position:relative;z-index:1;max-width:520px;margin:0 auto;padding:80px 24px 120px;text-align:left;">
-    <p style="font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#8a7e6e;margin-bottom:40px;font-family:'Lato',sans-serif;font-weight:300;">Om · About</p>
-    <div style="border-left:1px solid #c8c0b0;padding-left:32px;">
-      <p class="about-multi" lang="da">Der er intet at blive. Kun det at være. Denne app er en invitation til at se det – sammen.</p>
-      <p class="about-multi" lang="sv">Det finns inget att bli. Bara det att vara. Denna app är en inbjudan att se det – tillsammans.</p>
-      <p class="about-multi" lang="no">Det er ingenting å bli. Bare det å være. Denne appen er en invitasjon til å se det – sammen.</p>
-      <p class="about-multi" lang="en">There is nothing to become. Only being. This app is an invitation to see that — together.</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:16px;color:#8a7e6e;letter-spacing:.05em;margin-top:8px;">— Nicholas Mwesigye</p>
-    </div>
-    <div style="margin-top:60px;text-align:center;">
-      <button onclick="scrollToTop()" style="font-family:'Lato',sans-serif;font-weight:300;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a7e6e;background:none;border:none;cursor:pointer;">↑ Tilbage · Back</button>
-    </div>
-  </div>
-</div>
-
 <!-- DISCLAIMER -->
-<div id="screen-disclaimer" class="screen hidden">
-  <p class="lang-eyebrow" id="d-eyebrow"></p>
-  <div class="disclaimer-box">
-    <p class="disclaimer-title" id="d-title"></p>
-    <p class="disclaimer-text" id="d-text"></p>
-    <p class="crisis-line">
-      <span id="d-crisis-lead"></span>
-      <a href="https://livslinjen.dk" target="_blank" rel="noopener">livslinjen.dk</a> · <a href="https://mind.se" target="_blank" rel="noopener">mind.se</a> · <a href="https://mentalhelse.no" target="_blank" rel="noopener">mentalhelse.no</a> · <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>
-    </p>
+<div id="screen-disclaimer" class="screen welcome-screen">
+  <div class="lang-orb"></div>
+
+  <p class="welcome-eyebrow" id="intro-eyebrow"></p>
+
+  <p class="welcome-quote" id="intro-quote"></p>
+  <p class="welcome-tagline" id="intro-tagline"></p>
+
+  <div class="welcome-langs">
+    <button class="lang-btn w-lang" data-lang="da" onclick="setLang('da')">Dansk</button>
+    <button class="lang-btn w-lang" data-lang="sv" onclick="setLang('sv')">Svenska</button>
+    <button class="lang-btn w-lang" data-lang="no" onclick="setLang('no')">Norsk</button>
+    <button class="lang-btn w-lang" data-lang="en" onclick="setLang('en')">English</button>
   </div>
-  <div class="disclaimer-actions">
-    <button class="btn-ghost" id="d-btn-breath" onclick="showBreath()"></button>
-    <button class="btn-ghost btn-ghost-soft" id="d-btn" onclick="showCategories()"></button>
+
+  <div class="welcome-divider"></div>
+
+  <p class="welcome-terms-header" id="intro-terms-header"></p>
+
+  <div class="welcome-terms">
+    <div class="term-row">
+      <span class="term-icon">🌿</span>
+      <div class="term-body">
+        <strong class="term-label" id="intro-term1-label"></strong>
+        <span class="term-desc" id="intro-term1-desc"></span>
+      </div>
+    </div>
+    <div class="term-row">
+      <span class="term-icon">🔒</span>
+      <div class="term-body">
+        <strong class="term-label" id="intro-term2-label"></strong>
+        <span class="term-desc" id="intro-term2-desc"></span>
+      </div>
+    </div>
+    <div class="term-row">
+      <span class="term-icon">🕊️</span>
+      <div class="term-body">
+        <strong class="term-label" id="intro-term3-label"></strong>
+        <span class="term-desc" id="intro-term3-desc"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="crisis-line">
+    <span id="intro-crisis-lead"></span>
+    <a href="https://livslinjen.dk" target="_blank" rel="noopener">livslinjen.dk</a> ·
+    <a href="https://mind.se" target="_blank" rel="noopener">mind.se</a> ·
+    <a href="https://mentalhelse.no" target="_blank" rel="noopener">mentalhelse.no</a> ·
+    <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>
+  </p>
+
+  <div class="welcome-actions">
+    <button class="btn-ghost" id="intro-btn-breath" onclick="acceptAndBreath()"></button>
+    <button class="btn-ghost btn-ghost-soft" id="intro-btn-enter" onclick="acceptAndEnter()"></button>
   </div>
 </div>
 
@@ -235,6 +277,7 @@
 
 <!-- QUESTIONS -->
 <div id="screen-question" class="screen hidden" style="justify-content:flex-start;padding-top:48px;">
+  <button class="q-close" onclick="showClose()" aria-label="Luk">×</button>
   <div class="breath-orb"></div>
   <div class="q-header">
     <span class="q-logo" id="q-logo" onclick="showCategories()"></span>
@@ -887,124 +930,124 @@ const deeper = {
 // Visdomshvisken — omformuleret essens, ikke citater
 const whispers = {
   da:[
-    "Det lys du leder efter, lyser allerede der, hvor du leder fra.",
+    "Det lys du leder efter – kunne det lyse der, hvor du leder fra?",
     "Den der ser, og det der ses – er det virkelig to ting?",
-    "Tanken er en bevægelse, ikke en, der tænker. Den løber af sig selv.",
-    "Hver vej fører væk fra det, der allerede er her.",
-    "Du er ikke en del af helheden. Helheden bevæger sig som dig.",
-    "Bevidsthed er ikke noget, du har. Måske er det, det du er.",
+    "Er tanken nogen der tænker – eller en bevægelse der løber af sig selv?",
+    "Fører enhver vej væk fra det, der allerede er her?",
+    "Er du en del af helheden – eller bevæger den sig som dig?",
+    "Er bevidstheden noget du har – eller noget du er?",
     "At lytte uden at forberede svar – er det overhovedet sket i dag?",
-    "Frihed er ikke et valg. Det er fraværet af den, der vælger.",
-    "Det 'jeg', du forsvarer, har du sjældent set efter.",
-    "Vejen ud er ikke ude. Den har aldrig været det.",
-    "Ingen ord rør det. Det er det, ord prøver at pege på.",
-    "Stilhed er ikke fravær af lyd. Det er fravær af den, der lytter.",
-    "Når du ser blomsten uden at sammenligne – ser du for første gang.",
-    "Det er ikke verden, der er adskilt. Det er tanken, der deler.",
-    "Sandhed kan ikke gemmes. Den kommer kun, når du gør det."
+    "Er frihed et valg – eller fraværet af den, der vælger?",
+    "Det 'jeg' du forsvarer – har du set efter, om det er der?",
+    "Er vejen ud nogensinde ude?",
+    "Kan ord nogensinde røre det, de prøver at pege på?",
+    "Er stilhed fravær af lyd – eller fravær af den, der lytter?",
+    "Hvis du ser blomsten uden at sammenligne – ser du den så for første gang?",
+    "Er det verden der er adskilt – eller tanken der deler?",
+    "Kan sandheden gemmes – eller kommer den kun, når du selv gør det?"
   ],
   sv:[
-    "Ljuset du letar efter lyser redan där du letar ifrån.",
+    "Ljuset du letar efter – kunde det lysa där du letar ifrån?",
     "Den som ser, och det som ses – är det verkligen två saker?",
-    "Tanken är en rörelse, inte någon som tänker. Den löper av sig själv.",
-    "Varje väg leder bort från det som redan är här.",
-    "Du är inte en del av helheten. Helheten rör sig som dig.",
-    "Medvetande är inte något du har. Kanske är det något du är.",
+    "Är tanken någon som tänker – eller en rörelse som löper av sig själv?",
+    "Leder varje väg bort från det som redan är här?",
+    "Är du en del av helheten – eller rör den sig som dig?",
+    "Är medvetandet något du har – eller något du är?",
     "Att lyssna utan att förbereda ett svar – har det ens hänt idag?",
-    "Frihet är inte ett val. Det är frånvaron av den som väljer.",
-    "Det 'jag' du försvarar har du sällan undersökt.",
-    "Vägen ut är inte ute. Det har den aldrig varit.",
-    "Inga ord rör det. Det är det orden försöker peka mot.",
-    "Stillhet är inte frånvaro av ljud. Det är frånvaro av den som lyssnar.",
-    "När du ser blomman utan att jämföra – ser du för första gången.",
-    "Det är inte världen som är skild. Det är tanken som delar.",
-    "Sanning kan inte gömmas. Den kommer bara när du gör det."
+    "Är frihet ett val – eller frånvaron av den som väljer?",
+    "Det 'jag' du försvarar – har du sett efter om det finns där?",
+    "Är vägen ut någonsin ute?",
+    "Kan ord någonsin röra det som de försöker peka mot?",
+    "Är stillhet frånvaro av ljud – eller frånvaro av den som lyssnar?",
+    "Om du ser blomman utan att jämföra – ser du den då för första gången?",
+    "Är det världen som är skild – eller tanken som delar?",
+    "Kan sanningen gömmas – eller kommer den bara när du själv gör det?"
   ],
   no:[
-    "Lyset du leter etter lyser allerede der du leter fra.",
+    "Lyset du leter etter – kunne det lyse der du leter fra?",
     "Den som ser, og det som ses – er det virkelig to ting?",
-    "Tanken er en bevegelse, ikke noen som tenker. Den løper av seg selv.",
-    "Hver vei fører bort fra det som allerede er her.",
-    "Du er ikke en del av helheten. Helheten beveger seg som deg.",
-    "Bevissthet er ikke noe du har. Kanskje er det noe du er.",
+    "Er tanken noen som tenker – eller en bevegelse som løper av seg selv?",
+    "Fører enhver vei bort fra det som allerede er her?",
+    "Er du en del av helheten – eller beveger den seg som deg?",
+    "Er bevisstheten noe du har – eller noe du er?",
     "Å lytte uten å forberede svar – har det engang skjedd i dag?",
-    "Frihet er ikke et valg. Det er fraværet av den som velger.",
-    "Det 'jeg' du forsvarer har du sjelden undersøkt.",
-    "Veien ut er ikke ute. Den har aldri vært det.",
-    "Ingen ord rører det. Det er det ord prøver å peke mot.",
-    "Stillhet er ikke fravær av lyd. Det er fravær av den som lytter.",
-    "Når du ser blomsten uten å sammenligne – ser du for første gang.",
-    "Det er ikke verden som er atskilt. Det er tanken som deler.",
-    "Sannhet kan ikke gjemmes. Den kommer bare når du gjør det."
+    "Er frihet et valg – eller fraværet av den som velger?",
+    "Det 'jeg' du forsvarer – har du sett etter, om det er der?",
+    "Er veien ut noen gang ute?",
+    "Kan ord noen gang røre det som de prøver å peke mot?",
+    "Er stillhet fravær av lyd – eller fravær av den som lytter?",
+    "Hvis du ser blomsten uten å sammenligne – ser du den da for første gang?",
+    "Er det verden som er atskilt – eller tanken som deler?",
+    "Kan sannheten gjemmes – eller kommer den bare når du selv gjør det?"
   ],
   en:[
-    "The light you are looking for already shines where you are looking from.",
+    "The light you are looking for – could it be shining where you are looking from?",
     "The one who sees, and what is seen – are they really two things?",
-    "Thought is a movement, not someone who thinks. It runs by itself.",
-    "Every path leads away from what is already here.",
-    "You are not part of the whole. The whole moves as you.",
-    "Consciousness is not something you have. Perhaps it is what you are.",
+    "Is thought someone who thinks – or a movement that runs by itself?",
+    "Does every path lead away from what is already here?",
+    "Are you a part of the whole – or does the whole move as you?",
+    "Is consciousness something you have – or something you are?",
     "Listening without preparing a reply – has it even happened today?",
-    "Freedom is not a choice. It is the absence of the one who chooses.",
-    "The 'I' you defend, you have rarely looked into.",
-    "The way out is not out. It never was.",
-    "No words touch it. It is what words try to point to.",
-    "Silence is not the absence of sound. It is the absence of the one who listens.",
-    "When you see the flower without comparing – you see for the first time.",
-    "It is not the world that is divided. It is thought that divides.",
-    "Truth cannot be hidden. It only comes when you do."
+    "Is freedom a choice – or the absence of the one who chooses?",
+    "The 'I' you defend – have you looked to see if it is there?",
+    "Is the way out ever out?",
+    "Can words ever touch what they try to point to?",
+    "Is silence the absence of sound – or the absence of the one who listens?",
+    "If you see the flower without comparing – do you see it for the first time?",
+    "Is it the world that is divided – or thought that divides?",
+    "Can truth be hidden – or does it only come when you do?"
   ]
 };
 
 const ui = {
-  da:{logo:"Væren",disclaimer:{eyebrow:"Inden du træder ind",title:"Et ord før stilheden",text:"Dette er ikke terapi, rådgivning eller behandling. Det er et rum for din egen undersøgelse – ikke mit. Jeg stiller spørgsmål. Hvad du gør med dem, er dit. Hvis du befinder dig i krise eller har brug for hjælp, bedes du kontakte en professionel.",crisisLine:"Nogen at tale med —",btnBreath:"Træk vejret · træd ind",btn:"Træd ind"},
+  da:{logo:"Væren",welcome:{eyebrow:"Velkommen til Væren",quote:"Måske er der ikke noget at blive — kun det at være.",tagline:"Et rum for spørgsmål, stilhed og selv-undersøgelse.",termsHeader:"Før du træder ind",term1L:"Hvad det er",term1T:"Væren er et rum for din egen undersøgelse — ikke terapi, rådgivning eller behandling. Spørgsmål er her, ikke svar.",term2L:"Privatliv",term2T:"Ingen data gemmes. Ingen konto. Ingen algoritme. Intet sendes nogen steder hen.",term3L:"Hvis det bliver for meget",term3T:"Nogle spørgsmål kan røre ved noget. Du kan lukke når som helst og vende tilbage senere. Hvis du befinder dig i krise, bedes du kontakte en professionel.",crisisLine:"Nogen at tale med — en du stoler på, eller",btnBreath:"Træk vejret og træd ind",btnEnter:"Træd ind"},
     breath:{in:"Træk ind",out:"Slip",frame:"Et lille rum til at mærke dig selv",done:"Færdig",land:"Du er her."},
     catEyebrow:"Vælg et tema",catIntro:"Hvad kalder på dig lige nu?",surprise:"✦  Overrask mig",
     daily:"Dagens spørgsmål",dailySub:"Ét spørgsmål til denne dag",dailyDone:"Du har mødt dagens",dailyDoneSub:"Vend tilbage i morgen",
     whisperLabel:"Visdomshvisken",whisperSub:"En sætning at sidde med",whisperEyebrow:"Visdomshvisken",whisperNext:"Ny hvisken",
     breathLabel:"Ånderum",breathSub:"Et lille rum til at mærke dig selv",
     counter:(i,n)=>`Spørgsmål ${i} af ${n}`,counterSingle:"Dagens spørgsmål",
-    hint:"Sid med det. Lad det lande.",
+    hint:"Du behøver ikke svare.",
     deeperBtn:"Gå dybere",silenceBtn:"Stille tid",
-    silenceEyebrow:"Stille tid",silenceTitle:"Bliv et øjeblik. Lad spørgsmålet arbejde.",silenceMin:"minut",silenceMins:"minutter",silenceBack:"← Tilbage til spørgsmålet",silenceComplete:"Du er her igen.",silenceSkip:"Vend tilbage tidligt",
-    prev:"← Forrige",next:"Næste →",backToCats:"← Temaer",close:"Du behøver ikke finde svaret.\nDet er nok at have mærket spørgsmålet.",moreCats:"Udforsk et andet tema",restart:"Vend tilbage til start",footer:"Ingen data gemt · Ingen konto · Ingen algoritme",
-    about:{text:"Der er intet at blive. Kun det at være. Denne app er en invitation til at se det – sammen.",back:"Vend tilbage"}},
-  sv:{logo:"Tillvaron",disclaimer:{eyebrow:"Innan du stiger in",title:"Ett ord före stillheten",text:"Det här är inte terapi, rådgivning eller behandling. Det är ett rum för din egen undersökning – inte mitt. Jag ställer frågor. Vad du gör med dem är ditt. Om du befinner dig i kris eller behöver hjälp, vänligen kontakta en professionell.",crisisLine:"Någon att tala med —",btnBreath:"Andas · stig in",btn:"Stig in"},
+    silenceEyebrow:"Stille tid",silenceTitle:"Stilhed, hvis du vil.",silenceMin:"minut",silenceMins:"minutter",silenceBack:"← Tilbage til spørgsmålet",silenceComplete:"Du er her igen.",silenceSkip:"Vend tilbage tidligt",
+    prev:"← Forrige",next:"Næste →",backToCats:"← Temaer",close:"Måske er der ikke et svar.\nMåske er det selve spørgsmålet, der bliver.",moreCats:"Udforsk et andet tema",restart:"Vend tilbage til start",footer:"Ingen data gemt · Ingen konto · Ingen algoritme",
+    about:{text:"Måske er der ikke noget at blive — kun det at være. En invitation til at se efter, sammen.",back:"Vend tilbage"}},
+  sv:{logo:"Tillvaron",welcome:{eyebrow:"Välkommen till Tillvaron",quote:"Kanske finns det inget att bli — bara det att vara.",tagline:"Ett rum för frågor, stillhet och självundersökning.",termsHeader:"Innan du stiger in",term1L:"Vad det är",term1T:"Tillvaron är ett rum för din egen undersökning — inte terapi, rådgivning eller behandling. Frågor finns här, inte svar.",term2L:"Integritet",term2T:"Ingen data lagras. Inget konto. Ingen algoritm. Inget skickas någonstans.",term3L:"Om det blir för mycket",term3T:"Vissa frågor kan röra vid något. Du kan stänga när som helst och återvända senare. Om du befinner dig i kris, vänligen kontakta en professionell.",crisisLine:"Någon att tala med — någon du litar på, eller",btnBreath:"Andas och stig in",btnEnter:"Stig in"},
     breath:{in:"Andas in",out:"Släpp",frame:"Ett litet rum för att känna dig själv",done:"Klar",land:"Du är här."},
     catEyebrow:"Välj ett tema",catIntro:"Vad kallar på dig just nu?",surprise:"✦  Överraska mig",
     daily:"Dagens fråga",dailySub:"En fråga för denna dag",dailyDone:"Du har mött dagens",dailyDoneSub:"Återvänd imorgon",
     whisperLabel:"Visdomsviskning",whisperSub:"En mening att sitta med",whisperEyebrow:"Visdomsviskning",whisperNext:"Ny viskning",
     breathLabel:"Andrum",breathSub:"Ett litet rum för att känna dig själv",
     counter:(i,n)=>`Fråga ${i} av ${n}`,counterSingle:"Dagens fråga",
-    hint:"Sitt med den. Låt den landa.",
+    hint:"Du behöver inte svara.",
     deeperBtn:"Gå djupare",silenceBtn:"Stilla tid",
-    silenceEyebrow:"Stilla tid",silenceTitle:"Stanna ett ögonblick. Låt frågan arbeta.",silenceMin:"minut",silenceMins:"minuter",silenceBack:"← Tillbaka till frågan",silenceComplete:"Du är här igen.",silenceSkip:"Återvänd tidigt",
-    prev:"← Föregående",next:"Nästa →",backToCats:"← Teman",close:"Du behöver inte hitta svaret.\nDet räcker att ha känt frågan.",moreCats:"Utforska ett annat tema",restart:"Återvänd till start",footer:"Ingen data sparas · Inget konto · Ingen algoritm",
-    about:{text:"Det finns inget att bli. Bara det att vara. Denna app är en inbjudan att se det – tillsammans.",back:"Återvänd"}},
-  no:{logo:"Væren",disclaimer:{eyebrow:"Før du trer inn",title:"Et ord før stillheten",text:"Dette er ikke terapi, rådgivning eller behandling. Det er et rom for din egen undersøkelse – ikke mitt. Jeg stiller spørsmål. Hva du gjør med dem, er ditt. Hvis du befinner deg i krise eller trenger hjelp, ta kontakt med en fagperson.",crisisLine:"Noen å snakke med —",btnBreath:"Pust · tre inn",btn:"Tre inn"},
+    silenceEyebrow:"Stilla tid",silenceTitle:"Tystnad, om du vill.",silenceMin:"minut",silenceMins:"minuter",silenceBack:"← Tillbaka till frågan",silenceComplete:"Du är här igen.",silenceSkip:"Återvänd tidigt",
+    prev:"← Föregående",next:"Nästa →",backToCats:"← Teman",close:"Kanske finns det inget svar.\nKanske är det själva frågan som stannar.",moreCats:"Utforska ett annat tema",restart:"Återvänd till start",footer:"Ingen data sparas · Inget konto · Ingen algoritm",
+    about:{text:"Kanske finns det inget att bli — bara det att vara. En inbjudan att se efter, tillsammans.",back:"Återvänd"}},
+  no:{logo:"Væren",welcome:{eyebrow:"Velkommen til Væren",quote:"Kanskje er det ingenting å bli — bare det å være.",tagline:"Et rom for spørsmål, stillhet og selv-undersøkelse.",termsHeader:"Før du trer inn",term1L:"Hva det er",term1T:"Væren er et rom for din egen undersøkelse — ikke terapi, rådgivning eller behandling. Spørsmål er her, ikke svar.",term2L:"Personvern",term2T:"Ingen data lagres. Ingen konto. Ingen algoritme. Ingenting sendes noe sted.",term3L:"Hvis det blir for mye",term3T:"Noen spørsmål kan røre ved noe. Du kan lukke når som helst og komme tilbake senere. Hvis du befinner deg i krise, ta kontakt med en fagperson.",crisisLine:"Noen å snakke med — noen du stoler på, eller",btnBreath:"Pust og tre inn",btnEnter:"Tre inn"},
     breath:{in:"Pust inn",out:"Slipp",frame:"Et lite rom for å kjenne deg selv",done:"Ferdig",land:"Du er her."},
     catEyebrow:"Velg et tema",catIntro:"Hva kaller på deg akkurat nå?",surprise:"✦  Overrask meg",
     daily:"Dagens spørsmål",dailySub:"Ett spørsmål for denne dagen",dailyDone:"Du har møtt dagens",dailyDoneSub:"Kom tilbake i morgen",
     whisperLabel:"Visdomshvisken",whisperSub:"En setning å sitte med",whisperEyebrow:"Visdomshvisken",whisperNext:"Ny hvisken",
     breathLabel:"Pusterom",breathSub:"Et lite rom for å kjenne deg selv",
     counter:(i,n)=>`Spørsmål ${i} av ${n}`,counterSingle:"Dagens spørsmål",
-    hint:"Sitt med det. La det lande.",
+    hint:"Du trenger ikke svare.",
     deeperBtn:"Gå dypere",silenceBtn:"Stille tid",
-    silenceEyebrow:"Stille tid",silenceTitle:"Bli et øyeblikk. La spørsmålet arbeide.",silenceMin:"minutt",silenceMins:"minutter",silenceBack:"← Tilbake til spørsmålet",silenceComplete:"Du er her igjen.",silenceSkip:"Vend tilbake tidlig",
-    prev:"← Forrige",next:"Neste →",backToCats:"← Temaer",close:"Du trenger ikke finne svaret.\nDet er nok å ha kjent spørsmålet.",moreCats:"Utforsk et annet tema",restart:"Vend tilbake til start",footer:"Ingen data lagret · Ingen konto · Ingen algoritme",
-    about:{text:"Det er ingenting å bli. Bare det å være. Denne appen er en invitasjon til å se det – sammen.",back:"Vend tilbake"}},
-  en:{logo:"Being",disclaimer:{eyebrow:"Before you enter",title:"A word before the silence",text:"This is not therapy, counselling or treatment. It is a space for your own inquiry – not mine. I ask questions. What you do with them is yours. If you are in crisis or need help, please contact a professional.",crisisLine:"Someone to talk to —",btnBreath:"Breathe · enter",btn:"Enter"},
+    silenceEyebrow:"Stille tid",silenceTitle:"Stillhet, hvis du vil.",silenceMin:"minutt",silenceMins:"minutter",silenceBack:"← Tilbake til spørsmålet",silenceComplete:"Du er her igjen.",silenceSkip:"Vend tilbake tidlig",
+    prev:"← Forrige",next:"Neste →",backToCats:"← Temaer",close:"Kanskje er det ikke et svar.\nKanskje er det selve spørsmålet som blir.",moreCats:"Utforsk et annet tema",restart:"Vend tilbake til start",footer:"Ingen data lagret · Ingen konto · Ingen algoritme",
+    about:{text:"Kanskje er det ingenting å bli — bare det å være. En invitasjon til å se etter, sammen.",back:"Vend tilbake"}},
+  en:{logo:"Being",welcome:{eyebrow:"Welcome to Being",quote:"Perhaps there is nothing to become — only being.",tagline:"A space for questions, silence, and self-inquiry.",termsHeader:"Before you enter",term1L:"What it is",term1T:"Being is a space for your own inquiry — not therapy, counselling or treatment. Questions are here, not answers.",term2L:"Privacy",term2T:"No data is stored. No account. No algorithm. Nothing is sent anywhere.",term3L:"If it becomes too much",term3T:"Some questions may touch something. You can close at any time and return later. If you are in crisis, please contact a professional.",crisisLine:"Someone to talk to — someone you trust, or",btnBreath:"Breathe and enter",btnEnter:"Enter"},
     breath:{in:"Breathe in",out:"Release",frame:"A small space to feel yourself",done:"Done",land:"You are here."},
     catEyebrow:"Choose a theme",catIntro:"What calls to you right now?",surprise:"✦  Surprise me",
     daily:"Today's question",dailySub:"One question for this day",dailyDone:"You have met today's",dailyDoneSub:"Return tomorrow",
     whisperLabel:"A whisper",whisperSub:"A line to sit with",whisperEyebrow:"A whisper",whisperNext:"Another whisper",
     breathLabel:"Breathing room",breathSub:"A small space to feel yourself",
     counter:(i,n)=>`Question ${i} of ${n}`,counterSingle:"Today's question",
-    hint:"Sit with it. Let it land.",
+    hint:"You don't have to answer.",
     deeperBtn:"Go deeper",silenceBtn:"Quiet time",
-    silenceEyebrow:"Quiet time",silenceTitle:"Stay a moment. Let the question work.",silenceMin:"minute",silenceMins:"minutes",silenceBack:"← Back to the question",silenceComplete:"You are here again.",silenceSkip:"Return early",
-    prev:"← Previous",next:"Next →",backToCats:"← Themes",close:"You don't have to find the answer.\nIt's enough to have felt the question.",moreCats:"Explore another theme",restart:"Return to the start",footer:"No data stored · No account · No algorithm",
-    about:{text:"There is nothing to become. Only being. This app is an invitation to see that – together.",back:"Return"}}
+    silenceEyebrow:"Quiet time",silenceTitle:"Silence, if you wish.",silenceMin:"minute",silenceMins:"minutes",silenceBack:"← Back to the question",silenceComplete:"You are here again.",silenceSkip:"Return early",
+    prev:"← Previous",next:"Next →",backToCats:"← Themes",close:"Perhaps there is no answer.\nPerhaps it's the question itself that remains.",moreCats:"Explore another theme",restart:"Return to the start",footer:"No data stored · No account · No algorithm",
+    about:{text:"Perhaps there is nothing to become — only being. An invitation to look, together.",back:"Return"}}
 };
 
 // ====== STATE ======
@@ -1016,21 +1059,58 @@ let whisperIdx=0, lastWhisperIdx=-1;
 const catKeys=['selvindsigt','frygt','tid','sind','forhold','ensomhed','kaerlighed','frihed','enhed'];
 
 // ====== LANG ======
+// Mapper en browser-sprogkode til en af vores fire understøttede sprog
+function detectInitialLang(){
+  const raw=(navigator.language||'en').toLowerCase();
+  if(raw.startsWith('da'))return 'da';
+  if(raw.startsWith('sv'))return 'sv';
+  if(raw.startsWith('no')||raw.startsWith('nb')||raw.startsWith('nn'))return 'no';
+  return 'en';
+}
+
 function setLang(l){
   lang=l;
   document.documentElement.lang=l;
-  showDisclaimer();
+  // Vi bliver på velkomstskærmen — populerer bare teksterne i det nye sprog
+  renderWelcome();
 }
 
+// Populerer alle tekster på velkomstskærmen og markerer det aktive sprog
+function renderWelcome(){
+  const c=ui[lang];
+  const w=c.welcome;
+  setText('intro-eyebrow',w.eyebrow);
+  setText('intro-quote',w.quote);
+  setText('intro-tagline',w.tagline);
+  setText('intro-terms-header',w.termsHeader);
+  setText('intro-term1-label',w.term1L);
+  setText('intro-term1-desc',w.term1T);
+  setText('intro-term2-label',w.term2L);
+  setText('intro-term2-desc',w.term2T);
+  setText('intro-term3-label',w.term3L);
+  setText('intro-term3-desc',w.term3T);
+  setText('intro-crisis-lead',w.crisisLine);
+  setText('intro-btn-breath',w.btnBreath);
+  setText('intro-btn-enter',w.btnEnter);
+  setText('footer-text',c.footer);
+  // Marker hvilket sprog der er aktivt
+  document.querySelectorAll('#screen-disclaimer .lang-btn').forEach(btn=>{
+    btn.classList.toggle('lang-btn-active', btn.getAttribute('data-lang')===lang);
+  });
+}
+
+// Bevarer det gamle navn for bagudkompatibilitet (kaldes fra restart)
 function showDisclaimer(){
-  hide('screen-lang');
-  const d=ui[lang].disclaimer;
-  setText('d-eyebrow',d.eyebrow);setText('d-title',d.title);setText('d-text',d.text);
-  setText('d-crisis-lead',d.crisisLine);
-  setText('d-btn-breath',d.btnBreath);setText('d-btn',d.btn);
-  setText('footer-text',ui[lang].footer);
+  renderWelcome();
   show('screen-disclaimer');
 }
+
+// localStorage-baseret accept (samme mønster som Celleværen)
+const KEY_ACCEPTED='vaeren_accepted_v1';
+function hasAccepted(){try{return localStorage.getItem(KEY_ACCEPTED)==='true';}catch(e){return false;}}
+function markAccepted(){try{localStorage.setItem(KEY_ACCEPTED,'true');}catch(e){}}
+function acceptAndBreath(){markAccepted();showBreath();}
+function acceptAndEnter(){markAccepted();showCategories();}
 
 // ====== BREATH ======
 function showBreath(){
@@ -1117,6 +1197,7 @@ function startCategory(catKey){
     [qs[i],qs[j]]=[qs[j],qs[i]];
   }
   currentQuestions=qs;
+  hideAll();
   renderQuestion();
   show('screen-question');
 }
@@ -1159,6 +1240,7 @@ function showDaily(){
   currentCat=item.cat;
   currentQ=0;
   markDailySeen();
+  hideAll();
   renderQuestion();
   show('screen-question');
 }
@@ -1313,16 +1395,32 @@ function showClose(){
   show('screen-close');
 }
 
-function restart(){hideAll();show('screen-lang');window.scrollTo({top:0,behavior:'smooth'});}
+function restart(){hideAll();showDisclaimer();}
+
 function closeAbout(){hide('screen-about');show('screen-categories');}
-function scrollToAboutLang(){document.getElementById('lang-about-section').scrollIntoView({behavior:'smooth'});}
-function scrollToTop(){document.getElementById('lang-hero').scrollIntoView({behavior:'smooth'});}
+
+
 
 // ====== HELPERS ======
 function hideAll(){['screen-disclaimer','screen-breath','screen-categories','screen-question','screen-silence','screen-timer','screen-whisper','screen-close','screen-about'].forEach(hide);}
-function show(id){window.scrollTo(0,0);const el=document.getElementById(id);el.classList.remove('hidden');if(id!=='screen-lang'){el.style.animation='none';el.offsetHeight;el.style.animation='fadeIn .9s ease forwards';}}
+function show(id){window.scrollTo(0,0);const el=document.getElementById(id);el.classList.remove('hidden');el.style.animation='none';el.offsetHeight;el.style.animation='fadeIn .9s ease forwards';}
 function hide(id){const el=document.getElementById(id);if(el)el.classList.add('hidden');}
 function setText(id,t){const el=document.getElementById(id);if(el)el.textContent=t;}
+
+// ====== INIT ======
+// Ved opstart: detekter enhedens sprog. Hvis brugeren tidligere har accepteret,
+// går vi direkte til kategorierne. Ellers vises velkomstskærmen.
+// Kører straks (scriptet ligger nederst i body, så DOM er parset).
+(function init(){
+  lang=detectInitialLang();
+  document.documentElement.lang=lang;
+  renderWelcome();
+  if(hasAccepted()){
+    // Returnerende bruger — spring velkomst over, gå direkte til kategorierne
+    hide('screen-disclaimer');
+    showCategories();
+  }
+})();
 
 // ====== PWA ======
 if('serviceWorker' in navigator){
