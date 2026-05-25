@@ -272,6 +272,7 @@
     <button class="cat-mode-btn" id="cat-daily" onclick="showDaily()"></button>
     <button class="cat-mode-btn" id="cat-whisper" onclick="showWhisper()"></button>
     <button class="cat-mode-btn" id="cat-breath" onclick="showBreath()"></button>
+    <button class="cat-mode-btn" id="cat-fire" onclick="openFireMovements()"></button>
   </div>
 </div>
 
@@ -1006,6 +1007,7 @@ const ui = {
     daily:"Dagens spørgsmål",dailySub:"Ét spørgsmål til denne dag",dailyDone:"Du har mødt dagens",dailyDoneSub:"Vend tilbage i morgen",
     whisperLabel:"Visdomshvisken",whisperSub:"En sætning at sidde med",whisperEyebrow:"Visdomshvisken",whisperNext:"Ny hvisken",
     breathLabel:"Ånderum",breathSub:"Et lille rum til at mærke dig selv",
+    fireLabel:"Fire bevægelser",fireSub:"En vandring i dualitet, stilhed og tilbagevenden",
     counter:(i,n)=>`Spørgsmål ${i} af ${n}`,counterSingle:"Dagens spørgsmål",
     hint:"Du behøver ikke svare.",
     deeperBtn:"Gå dybere",silenceBtn:"Stille tid",
@@ -1018,6 +1020,7 @@ const ui = {
     daily:"Dagens fråga",dailySub:"En fråga för denna dag",dailyDone:"Du har mött dagens",dailyDoneSub:"Återvänd imorgon",
     whisperLabel:"Visdomsviskning",whisperSub:"En mening att sitta med",whisperEyebrow:"Visdomsviskning",whisperNext:"Ny viskning",
     breathLabel:"Andrum",breathSub:"Ett litet rum för att känna dig själv",
+    fireLabel:"Fyra rörelser",fireSub:"En vandring i dualitet, tystnad och återkomst",
     counter:(i,n)=>`Fråga ${i} av ${n}`,counterSingle:"Dagens fråga",
     hint:"Du behöver inte svara.",
     deeperBtn:"Gå djupare",silenceBtn:"Stilla tid",
@@ -1030,6 +1033,7 @@ const ui = {
     daily:"Dagens spørsmål",dailySub:"Ett spørsmål for denne dagen",dailyDone:"Du har møtt dagens",dailyDoneSub:"Kom tilbake i morgen",
     whisperLabel:"Visdomshvisken",whisperSub:"En setning å sitte med",whisperEyebrow:"Visdomshvisken",whisperNext:"Ny hvisken",
     breathLabel:"Pusterom",breathSub:"Et lite rom for å kjenne deg selv",
+    fireLabel:"Fire bevegelser",fireSub:"En vandring i dualitet, stillhet og tilbakekomst",
     counter:(i,n)=>`Spørsmål ${i} av ${n}`,counterSingle:"Dagens spørsmål",
     hint:"Du trenger ikke svare.",
     deeperBtn:"Gå dypere",silenceBtn:"Stille tid",
@@ -1042,6 +1046,7 @@ const ui = {
     daily:"Today's question",dailySub:"One question for this day",dailyDone:"You have met today's",dailyDoneSub:"Return tomorrow",
     whisperLabel:"A whisper",whisperSub:"A line to sit with",whisperEyebrow:"A whisper",whisperNext:"Another whisper",
     breathLabel:"Breathing room",breathSub:"A small space to feel yourself",
+    fireLabel:"Four movements",fireSub:"A passage through duality, silence and return",
     counter:(i,n)=>`Question ${i} of ${n}`,counterSingle:"Today's question",
     hint:"You don't have to answer.",
     deeperBtn:"Go deeper",silenceBtn:"Quiet time",
@@ -1175,7 +1180,15 @@ function showCategories(){
   document.getElementById('cat-whisper').innerHTML=`${c.whisperLabel}<span class="mode-sub">${c.whisperSub}</span>`;
   // Breath button
   document.getElementById('cat-breath').innerHTML=`${c.breathLabel}<span class="mode-sub">${c.breathSub}</span>`;
+  // Fire bevægelser button — en vandring inden i Væren
+  document.getElementById('cat-fire').innerHTML=`${c.fireLabel}<span class="mode-sub">${c.fireSub}</span>`;
   show('screen-categories');
+}
+
+function openFireMovements(){
+  // En bevidst rejse ud af Værens åbne rum, ind i den strukturerede vandring.
+  // Samme vindue — bevægelsen er en bevægelse, ikke en sidebar.
+  window.location.href='https://mwesigye10.github.io/fire-bevaegelser/';
 }
 
 function surpriseMe(){
